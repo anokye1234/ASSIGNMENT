@@ -26,29 +26,43 @@ def get_int(prompt):
 		except ValueError:
 			print("Please enter a valid integer.")
 
+
 def main():
-	print("--- 2 by 2 Multiplication ---")
-	a = get_int("Enter the first number: ")
-	b = get_int("Enter the second number: ")
-	print("Choose operation:")
-	print("1. Multiplication")
-	print("2. Addition")
-	choice = input("Enter 1 or 2: ")
-
-	# Polymorphism: use base class reference
-	if choice == '1':
-		operation = TwoByTwoMultiplication(a, b)
-	elif choice == '2':
-		operation = TwoByTwoAddition(a, b)
-	else:
-		print("Invalid choice.")
-		return
-
+	print("--- 2 by 2 Multiplication Table ---")
 	try:
-		result = operation.calculate()
-		print(f"Result: {result}")
-	except Exception as error:
-		print(f"Something went wrong: {error}")
+		a = get_int("Enter the first number: ")
+		b = get_int("Enter the second number: ")
+		print("Choose operation:")
+		print("1. Multiplication")
+		print("2. Addition")
+		choice = input("Enter 1 or 2: ")
+
+		# Polymorphism: use base class reference
+		if choice == '1':
+			operation = TwoByTwoMultiplication(a, b)
+		elif choice == '2':
+			operation = TwoByTwoAddition(a, b)
+		else:
+			print("Invalid choice.")
+			return
+
+		try:
+			result = operation.calculate()
+			print(f"Result: {result}")
+		except Exception as error:
+			print(f"Calculation error: {error}")
+
+		# Show 2x2 multiplication table
+		print("\n2 by 2 Multiplication Table:")
+		for i in range(1, 3):
+			for j in range(1, 3):
+				try:
+					table_op = TwoByTwoMultiplication(i, j)
+					print(f"{i} x {j} = {table_op.calculate()}")
+				except Exception as table_error:
+					print(f"Error in table calculation: {table_error}")
+	except Exception as main_error:
+		print(f"Main error: {main_error}")
 
 if __name__ == "__main__":
 	main()
